@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ProductVariant extends Model
 {
     protected $table = 'product_variants';
+
     protected $primaryKey = 'id';
+
     protected $keyType = 'string';
+
     public $incrementing = true;
+
     public $timestamps = true;
+
     protected $fillable = [
         'sku',
         'stock',

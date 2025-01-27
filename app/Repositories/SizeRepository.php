@@ -18,6 +18,7 @@ class SizeRepository implements SizeRepositoryInterface
                 $builder->orWhere('name', 'LIKE', '%'.$search.'%');
             }
         });
+
         return $sizes->paginate(perPage: $filters['perPage'], page: $filters['page']);
     }
 
@@ -28,7 +29,7 @@ class SizeRepository implements SizeRepositoryInterface
 
     public function create(array $data): Size
     {
-        // TODO: Implement create() method.
+        return $this->size->create($data);
     }
 
     public function update(string $id, array $data): Size

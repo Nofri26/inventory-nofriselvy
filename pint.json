@@ -1,0 +1,1 @@
+{    "preset": "laravel",    "rules": {        "array_syntax": {            "syntax": "short"        },        "binary_operator_spaces": {            "default": "align_single_space_minimal"        }    },    "exclude": [        "storage",        "vendor"    ]}

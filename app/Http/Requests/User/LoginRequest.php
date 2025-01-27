@@ -7,9 +7,6 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 
-/**
- *
- */
 class LoginRequest extends FormRequest
 {
     /**
@@ -33,10 +30,6 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    /**
-     * @param $validator
-     * @return void
-     */
     public function withValidator($validator): void
     {
         $validator->after(function ($validator) {

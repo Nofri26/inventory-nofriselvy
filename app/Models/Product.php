@@ -13,10 +13,15 @@ class Product extends Model
     use HasUuids, SoftDeletes;
 
     protected $table = 'products';
+
     protected $primaryKey = 'id';
+
     protected $keyType = 'string';
+
     public $incrementing = true;
+
     public $timestamps = true;
+
     protected $fillable = [
         'name',
         'description',

@@ -14,7 +14,7 @@ class SizeSeeder extends Seeder
     {
         for ($i = 1; $i <= 20; $i++) {
             Size::query()->create([
-                'name' => 'S'.$i,
+                'name'        => 'S'.$i,
                 'description' => 'Size #'.$i,
             ]);
         }

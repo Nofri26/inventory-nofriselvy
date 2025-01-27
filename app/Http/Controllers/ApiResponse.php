@@ -13,5 +13,4 @@ class ApiResponse
     const RESPONSE_DELETE = 'Data berhasil dihapus';
 
     const RESPONSE_NOT_FOUND = 'Data tidak ditemukan';
-
 }

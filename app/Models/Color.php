@@ -11,10 +11,15 @@ class Color extends Model
     use HasUuids;
 
     protected $table = 'colors';
+
     protected $primaryKey = 'id';
+
     protected $keyType = 'string';
+
     public $incrementing = true;
+
     public $timestamps = true;
+
     protected $fillable = [
         'name',
         'hex_code',

@@ -19,7 +19,7 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'User register successfully.',
-            'data' => new UserResource($user),
+            'data'    => new UserResource($user),
         ])->setStatusCode(201);
     }
 
@@ -30,7 +30,7 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'User login successfully.',
-            'data' => new UserResource($user),
+            'data'    => new UserResource($user),
         ]);
     }
 
@@ -40,7 +40,7 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'User logout successfully.',
-            'data' => new UserResource($user),
+            'data'    => new UserResource($user),
         ]);
     }
 }

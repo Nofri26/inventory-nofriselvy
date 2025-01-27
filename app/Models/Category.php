@@ -11,10 +11,15 @@ class Category extends Model
     use HasUuids;
 
     protected $table = 'categories';
+
     protected $primaryKey = 'id';
+
     protected $keyType = 'string';
+
     public $incrementing = true;
+
     public $timestamps = true;
+
     protected $fillable = [
         'name',
         'description',
