@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Feature;
 
 use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
-class RegisterTest extends TestCase
+class UserTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -26,6 +26,44 @@ class RegisterTest extends TestCase
                     'first_name' => 'Admin',
                     'last_name' => 'Test',
                     'username' => 'admintest',
+                ],
+            ]);
+    }
+
+    public function test_register_failed()
+    {
+        $this->postJson(route('user.register'), [
+            'first_name' => '',
+            'last_name' => '',
+            'username' => '',
+            'password' => '',
+            'password_confirmation' => '',
+        ])->assertStatus(422)
+            ->assertJson([
+                'message' => 'The first name field is required. (and 3 more errors)',
+                'errors' => [
+                    'first_name' => ['The first name field is required.'],
+                    'last_name' => ['The last name field is required.'],
+                    'username' => ['The username field is required.'],
+                    'password' => ['The password field is required.'],
+                ],
+            ]);
+    }
+
+    public function test_register_username_already_been_taken()
+    {
+        $this->test_register_success();
+        $this->postJson(route('user.register'), [
+            'first_name' => 'Admin',
+            'last_name' => 'Test',
+            'username' => 'admintest',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ])->assertStatus(422)
+            ->assertJson([
+                'message' => 'The username has already been taken.',
+                'errors' => [
+                    'username' => ['The username has already been taken.'],
                 ],
             ]);
     }
@@ -63,6 +101,25 @@ class RegisterTest extends TestCase
                 'errors' => [
                     'username' => ['Invalid username or password.'],
                 ],
+            ]);
+    }
+
+    public function test_logout_success()
+    {
+        $this->test_login_success();
+        $this->deleteJson(route('user.logout'))
+            ->assertStatus(200)
+            ->assertJson([
+                'message' => 'User logout successfully.',
+            ]);
+    }
+
+    public function test_logout_failed()
+    {
+        $this->deleteJson(route('user.logout'))
+            ->assertStatus(401)
+            ->assertJson([
+                'message' => 'Unauthenticated.',
             ]);
     }
 }

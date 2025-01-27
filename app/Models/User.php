@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Model implements Authenticatable
@@ -26,11 +26,17 @@ class User extends Model implements Authenticatable
         'first_name',
         'last_name',
         'username',
+        'password',
     ];
 
     protected $hidden = [
         'password',
     ];
+
+    public function product(): HasMany
+    {
+        return $this->hasMany(Product::class, 'created_by_id', 'id');
+    }
 
     public function getAuthIdentifierName()
     {
