@@ -1,28 +1,29 @@
 <?php
 
-namespace App\Http\Requests\Size;
+namespace App\Http\Requests\Categories;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user() != null;
+        return $this->user() !== null;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            'name'        => ['required', 'string', 'max:50', 'unique:sizes,name'],
+            'name'        => ['required', 'string', 'max:100', 'unique:categories,name'],
             'description' => ['nullable', 'string'],
         ];
     }

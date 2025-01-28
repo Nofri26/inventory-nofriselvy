@@ -6,18 +6,19 @@ use Illuminate\Http\JsonResponse;
 
 abstract class Controller
 {
-    public function sendResponse($message = 'Action Successfully', $data = null, $meta = false, $responseCode = 200): JsonResponse
+    public function sendResponse($message = 'Action Successfully', $data = null, $withMeta = false, $responseCode = 200): JsonResponse
     {
-        if ($meta) {
+        if ($withMeta) {
             return response()->json([
                 'message' => $message,
                 'data'    => $data,
                 'meta'    => [
-                    'page'      => $data->currentPage(),
-                    'perPage'   => $data->perPage(),
-                    'total'     => $data->count(),
-                    'totalData' => $data->total(),
-                    'totalPage' => $data->lastPage(),
+                    'page'        => $data->currentPage(),
+                    'perPage'     => $data->perPage(),
+                    'total'       => $data->count(),
+                    'totalData'   => $data->total(),
+                    'totalPage'   => $data->lastPage(),
+                    'currentPage' => $data->currentPage(),
                 ],
             ], $responseCode);
         } else {

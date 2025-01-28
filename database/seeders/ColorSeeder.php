@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\Color;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class ColorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,9 +13,9 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         for ($i = 1; $i <= 20; $i++) {
-            Category::query()->create([
-                'name'        => 'C' . $i,
-                'description' => 'Category #' . $i,
+            Color::query()->create([
+                'name'     => 'Col' . $i,
+                'hex_code' => '#Color' . $i,
             ]);
         }
     }

@@ -22,6 +22,8 @@ class Size extends Model
 
     protected $fillable = [
         'name',
+        'age_from',
+        'age_to',
         'description',
     ];
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Users;
 
 use App\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -32,7 +32,7 @@ class LoginRequest extends FormRequest
 
     public function withValidator($validator): void
     {
-        $validator->after(function ($validator) {
+        $validator->after(function($validator) {
             $user = User::query()->where('username', $this->username)->first();
 
             if (! $user || ! Hash::check($this->password, $user->password)) {

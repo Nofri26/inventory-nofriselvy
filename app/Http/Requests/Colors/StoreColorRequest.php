@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Colors;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class StoreColorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user() !== null;
     }
 
     /**
@@ -23,10 +23,8 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name'  => ['required', 'string', 'max:255'],
-            'username'   => ['required', 'string', 'min:8', 'max:100', 'regex:/^[a-zA-Z0-9]+$/', 'unique:users,username'],
-            'password'   => ['required', 'string', 'min:8', 'confirmed'],
+            'name'     => ['required', 'string', 'max:100', 'unique:colors,name'],
+            'hex_code' => ['required', 'string', 'max:7', 'unique:colors,hex_code'],
         ];
     }
 }

@@ -10,7 +10,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Model implements Authenticatable
 {
-    use HasApiTokens, HasUuids;
+    use HasApiTokens;
+    use HasUuids;
 
     protected $table = 'users';
 

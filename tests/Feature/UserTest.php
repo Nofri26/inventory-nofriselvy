@@ -62,7 +62,7 @@ class UserTest extends TestCase
                 'password_confirmation' => 'password',
             ])->assertStatus(201)
             ->assertJson([
-                'message' => 'User register successfully.',
+                'message' => 'Users register successfully.',
                 'data'    => [
                     'first_name' => 'Admin',
                     'last_name'  => 'Test',
@@ -94,7 +94,7 @@ class UserTest extends TestCase
             ->deleteJson(route('user.logout'))
             ->assertStatus(200)
             ->assertJson([
-                'message' => 'User logout successfully.',
+                'message' => 'Users logout successfully.',
             ]);
     }
 
@@ -107,7 +107,7 @@ class UserTest extends TestCase
                 'password' => 'password',
             ])->assertStatus(200)
             ->assertJson([
-                'message' => 'User login successfully.',
+                'message' => 'Users login successfully.',
                 'data'    => [
                     'first_name' => 'Admin',
                     'last_name'  => 'Test',

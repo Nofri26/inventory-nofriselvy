@@ -12,33 +12,30 @@ class SizeRepository implements SizeRepositoryInterface
 
     public function findAll(array $filters): LengthAwarePaginator
     {
-        $sizes = $this->size->where(function (Builder $builder) use ($filters) {
+        $sizes = $this->size->newQuery()->where(function(Builder $builder) use ($filters) {
             $search = $filters['search'];
             if (! empty($search)) {
-                $builder->orWhere('name', 'LIKE', '%'.$search.'%');
+                $builder->orWhere('name', 'LIKE', "%$search%");
             }
         });
 
         return $sizes->paginate(perPage: $filters['perPage'], page: $filters['page']);
     }
 
-    public function findById(string $id): ?Size
-    {
-        // TODO: Implement findById() method.
-    }
-
     public function create(array $data): Size
     {
-        return $this->size->create($data);
+        return $this->size->newQuery()->create($data);
     }
 
-    public function update(string $id, array $data): Size
+    public function update(Size $size, array $data): Size
     {
-        // TODO: Implement update() method.
+        $size->update($data);
+
+        return $size;
     }
 
-    public function delete(string $id): bool
+    public function delete(Size $size): bool
     {
-        // TODO: Implement delete() method.
+        return $size->delete();
     }
 }

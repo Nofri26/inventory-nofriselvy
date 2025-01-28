@@ -15,6 +15,8 @@ class AppServiceProvider extends ServiceProvider implements DeferrableProvider
     {
         $this->app->bind(Repositories\UserRepositoryInterface::class, Repositories\UserRepository::class);
         $this->app->bind(Repositories\SizeRepositoryInterface::class, Repositories\SizeRepository::class);
+        $this->app->bind(Repositories\CategoryRepositoryInterface::class, Repositories\CategoryRepository::class);
+        $this->app->bind(Repositories\ColorRepositoryInterface::class, Repositories\ColorRepository::class);
     }
 
     /**

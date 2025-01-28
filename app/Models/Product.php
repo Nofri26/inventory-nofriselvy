@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasUuids, SoftDeletes;
+    use HasUuids;
+    use SoftDeletes;
 
     protected $table = 'products';
 
@@ -30,7 +31,7 @@ class Product extends Model
 
     public function creator(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by_id', 'id', Product::class);
+        return $this->belongsTo(User::class, 'created_by_id', 'id', self::class);
     }
 
     public function productVariants(): HasMany

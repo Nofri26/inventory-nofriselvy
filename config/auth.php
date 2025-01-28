@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -44,7 +43,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | User Providers
+    | Users Providers
     |--------------------------------------------------------------------------
     |
     | All authentication guards have a user provider, which defines how the
