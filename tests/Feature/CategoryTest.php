@@ -27,6 +27,15 @@ class CategoryTest extends TestCase
         ]);
     }
 
+    public function test_get_all_data()
+    {
+        $response = $this->get(route('categories.get'))
+            ->assertStatus(200)
+            ->json();
+
+        self::assertCount(20, $response['data']);
+    }
+
     public function test_create_success()
     {
         $this
@@ -64,6 +73,26 @@ class CategoryTest extends TestCase
             ->json();
 
         self::assertEquals(20, $response['meta']['totalData']);
+    }
+
+    public function test_index_per_page()
+    {
+        $response = $this->get(route('categories.index', [
+            'perPage' => 20,
+        ]))->assertStatus(200)
+            ->json();
+
+        self::assertEquals(20, $response['meta']['perPage']);
+    }
+
+    public function test_index_page()
+    {
+        $response = $this->get(route('categories.index', [
+            'page' => 2,
+        ]))->assertStatus(200)
+            ->json();
+
+        self::assertEquals(2, $response['meta']['page']);
     }
 
     public function test_show_success()

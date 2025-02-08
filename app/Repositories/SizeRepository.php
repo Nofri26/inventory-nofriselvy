@@ -4,13 +4,19 @@ namespace App\Repositories;
 
 use App\Models\Size;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class SizeRepository implements SizeRepositoryInterface
 {
     public function __construct(protected Size $size) {}
 
-    public function findAll(array $filters): LengthAwarePaginator
+    public function findAll(): Collection
+    {
+        return $this->size->newQuery()->select(['id', 'name'])->get();
+    }
+
+    public function getAllPaginated(array $filters): LengthAwarePaginator
     {
         $sizes = $this->size->newQuery()->where(function(Builder $builder) use ($filters) {
             $search = $filters['search'];

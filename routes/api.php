@@ -1,17 +1,21 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ColorController;
-use App\Http\Controllers\SizeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/register', [UserController::class, 'register'])->name('user.register');
-Route::post('/login', [UserController::class, 'login'])->name('user.login');
+Route::post('/register', [Controllers\UserController::class, 'register'])->name('user.register');
+Route::post('/login', [Controllers\UserController::class, 'login'])->name('user.login');
 Route::middleware(['auth:sanctum'])->group(function() {
-    Route::delete('/logout', [UserController::class, 'logout'])->name('user.logout');
+    Route::delete('/logout', [Controllers\UserController::class, 'logout'])->name('user.logout');
 
-    Route::apiResource('/sizes', SizeController::class);
-    Route::apiResource('/categories', CategoryController::class);
-    Route::apiResource('/colors', ColorController::class);
+    Route::get('/sizes/get', [Controllers\SizeController::class, 'get'])->name('sizes.get');
+    Route::apiResource('/sizes', Controllers\SizeController::class);
+
+    Route::get('/categories/get', [Controllers\CategoryController::class, 'get'])->name('categories.get');
+    Route::apiResource('/categories', Controllers\CategoryController::class);
+
+    Route::get('/colors/get', [Controllers\ColorController::class, 'get'])->name('colors.get');
+    Route::apiResource('/colors', Controllers\ColorController::class);
+
+    Route::apiResource('/products', Controllers\ProductController::class);
 });

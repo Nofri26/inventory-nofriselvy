@@ -11,12 +11,19 @@ use Illuminate\Http\Request;
 
 class SizeController extends Controller
 {
-    public function __construct(protected SizeService $service) {}
+    public function __construct(protected SizeService $sizeService) {}
+
+    public function get(): JsonResponse
+    {
+        $sizes = $this->sizeService->findAll();
+
+        return $this->sendResponse(ApiResponse::RESPONSE_GET, SizeResource::collection($sizes));
+    }
 
     public function index(Request $request): JsonResponse
     {
         $filters = $request->all();
-        $sizes   = $this->service->findAll($filters);
+        $sizes   = $this->sizeService->getAllPaginatedSizes($filters);
 
         return $this->sendResponse(ApiResponse::RESPONSE_GET, SizeResource::collection($sizes), withMeta: true);
     }
@@ -24,7 +31,7 @@ class SizeController extends Controller
     public function store(Sizes\StoreRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $size = $this->service->create($data);
+        $size = $this->sizeService->create($data);
 
         return $this->sendResponse(ApiResponse::RESPONSE_CREATE, new SizeResource($size), responseCode: 201);
     }
@@ -37,14 +44,14 @@ class SizeController extends Controller
     public function update(Sizes\UpdateRequest $request, Size $size): JsonResponse
     {
         $data = $request->validated();
-        $size = $this->service->update($size, $data);
+        $size = $this->sizeService->update($size, $data);
 
         return $this->sendResponse(ApiResponse::RESPONSE_UPDATE, new SizeResource($size));
     }
 
     public function destroy(Size $size): JsonResponse
     {
-        $this->service->delete($size);
+        $this->sizeService->delete($size);
 
         return $this->sendResponse(ApiResponse::RESPONSE_DELETE);
     }

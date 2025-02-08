@@ -13,9 +13,16 @@ class ColorController extends Controller
 {
     public function __construct(protected ColorService $colorService) {}
 
+    public function get(): JsonResponse
+    {
+        $colors = $this->colorService->findAll();
+
+        return $this->sendResponse(ApiResponse::RESPONSE_GET, ColorResource::collection($colors));
+    }
+
     public function index(Request $request): JsonResponse
     {
-        $colors = $this->colorService->findAllColor($request->all());
+        $colors = $this->colorService->getAllPaginatedColors($request->all());
 
         return $this->sendResponse(ApiResponse::RESPONSE_GET, ColorResource::collection($colors), withMeta: true);
     }

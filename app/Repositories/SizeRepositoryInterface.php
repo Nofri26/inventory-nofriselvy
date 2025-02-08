@@ -3,11 +3,14 @@
 namespace App\Repositories;
 
 use App\Models\Size;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface SizeRepositoryInterface
 {
-    public function findAll(array $filters): LengthAwarePaginator;
+    public function findAll(): Collection;
+
+    public function getAllPaginated(array $filters): LengthAwarePaginator;
 
     public function create(array $data): Size;
 

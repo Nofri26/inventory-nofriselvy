@@ -3,15 +3,18 @@
 namespace App\Repositories;
 
 use App\Models\Color;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface ColorRepositoryInterface
 {
-    public function findAllColor(array $filters): LengthAwarePaginator;
+    public function findAll(): Collection;
 
-    public function createColor(array $data): Color;
+    public function getAllPaginated(array $filters): LengthAwarePaginator;
 
-    public function updateColor(Color $color, array $data): Color;
+    public function create(array $data): Color;
 
-    public function deleteColor(Color $color): bool;
+    public function update(Color $color, array $data): Color;
+
+    public function delete(Color $color): bool;
 }

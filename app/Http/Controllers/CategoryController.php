@@ -13,10 +13,17 @@ class CategoryController extends Controller
 {
     public function __construct(protected CategoryService $categoryService) {}
 
+    public function get(): JsonResponse
+    {
+        $categories = $this->categoryService->findAll();
+
+        return $this->sendResponse(ApiResponse::RESPONSE_GET, CategoryResource::collection($categories));
+    }
+
     public function index(Request $request): JsonResponse
     {
         $data     = $request->all();
-        $category = $this->categoryService->findAllCategory($data);
+        $category = $this->categoryService->getPaginatedCategories($data);
 
         return $this->sendResponse(ApiResponse::RESPONSE_GET, CategoryResource::collection($category), withMeta: true);
     }
